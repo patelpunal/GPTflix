@@ -207,9 +207,11 @@ def summarize_past_conversation(content):
     else:
         return None
 
-
-
-
+COMPLETIONS_API_PARAMS = {
+     "temperature": 0.0,
+     "max_tokens": 500,
+     "model": COMPLETIONS_MODEL,
+ }
 
 COMPLETIONS_API_PARAMS = {
          "temperature": 0.0,
@@ -244,8 +246,6 @@ COMPLETIONS_API_PARAMS = {
          return choices[0]["message"]["content"].strip(" \n")
      else:
          return None
-
-
 
 # # Storing the chat
  if 'generated' not in st.session_state:
