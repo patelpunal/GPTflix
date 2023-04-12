@@ -181,31 +181,31 @@ def construct_prompt_pinecone(question):
 
 # TO BE ADDED: memory with summary of past discussions
 
-# def summarize_past_conversation(content):
+def summarize_past_conversation(content):
 
-#     APPEND_COMPLETION_PARAMS = {
-#         "temperature": 0.0,
-#         "max_tokens": 300,
-#         "model": COMPLETIONS_MODEL,
-#     }
+    APPEND_COMPLETION_PARAMS = {
+        "temperature": 0.0,
+        "max_tokens": 300,
+        "model": COMPLETIONS_MODEL,
+    }
 
-#     prompt = "Summarize this discussion into a single paragraph keeping the titles of any movies mentioned: \n" + content
+    prompt = "Summarize this discussion into a single paragraph keeping the titles of any movies mentioned: \n" + content
 
-#     try:
-#         response = openai.Completion.create(
-#                     prompt=prompt,
-#                     **APPEND_COMPLETION_PARAMS
-#                 )
-#     except Exception as e:
-#         print("I'm afraid your question failed! This is the error: ")
-#         print(e)
-#         return None
+    try:
+        response = openai.Completion.create(
+            prompt=prompt,
+                    **APPEND_COMPLETION_PARAMS
+        )
+    except Exception as e:
+        print("I'm afraid your question failed! This is the error: ")
+        print(e)
+        return None
 
-#     choices = response.get("choices", [])
-#     if len(choices) > 0:
-#         return choices[0]["text"].strip(" \n")
-#     else:
-#         return None
+    choices = response.get("choices", [])
+    if len(choices) > 0:
+        return choices[0]["text"].strip(" \n")
+    else:
+        return None
 
 
 
