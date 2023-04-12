@@ -247,36 +247,32 @@ def answer_query_with_context_pinecone(query):
         return None
 
 # # Storing the chat
- if 'generated' not in st.session_state:
-     st.session_state['generated'] = []
+# Storing the chat
+if 'generated' not in st.session_state:
+    st.session_state['generated'] = []
 
- if 'past' not in st.session_state:
-     st.session_state['past'] = []
+if 'past' not in st.session_state:
+    st.session_state['past'] = []
 
- def clear_text():
-     st.session_state["input"] = ""
+def clear_text():
+    st.session_state["input"] = ""
 
-# # We will get the user's input by calling the get_text function
- def get_text():
-     input_text = st.text_input("Input a question here! For example: \"Is X movie good?\". \n It works best if your question contains the title of a movie! You might want to be really specific, like talking about Pixar's Brave rather than just Brave. Also, I have no memory of previous questions!😅😊","Who are you?", key="input")
-     return input_text
+# We will get the user's input by calling the get_text function
+def get_text():
+    input_text = st.text_input("Input a question here! For example: \"Is X movie good?\". \n It works best if your question contains the title of a movie! You might want to be really specific, like talking about Pixar's Brave rather than just Brave. Also, I have no memory of previous questions!😅😊","Who are you?", key="input")
+    return input_text
 
+user_input = get_text()
 
+if user_input:
+    output = answer_query_with_context_pinecone(user_input)
 
- user_input = get_text()
-
-
- if user_input:
-     output = answer_query_with_context_pinecone(user_input)
-
-#     # store the output 
-     st.session_state.past.append(user_input)
-     st.session_state.generated.append(output)
+    # store the output 
+    st.session_state.past.append(user_input)
+    st.session_state.generated.append(output)
 
 
- if st.session_state['generated']:
-     for i in range(len(st.session_state['generated'])-1, -1, -1):
-         message(st.session_state["generated"][i],seed=bott_av , key=str(i))
-         message(st.session_state['past'][i], is_user=True,avatar_style="adventurer",seed=user_av, key=str(i) + '_user')
-
-
+if st.session_state['generated']:
+    for i in range(len(st.session_state['generated'])-1, -1, -1):
+        message(st.session_state["generated"][i],seed=bott_av , key=str(i))
+        message(st.session_state['past'][i], is_user=True,avatar_style="adventurer",seed=user_av, key=str(i) + '_user')
