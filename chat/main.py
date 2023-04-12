@@ -11,15 +11,15 @@ import random
 from PIL import Image
 
 pinecone_api_key = st.secrets["API_KEYS"]["pinecone"]
-
-pinecone.init(api_key=pinecone_api_key, environment="us-east1-gcp")
+environment= st.secrets["API_KEYS"]["env"]
+pinecone.init(api_key=pinecone_api_key, environment=environment)
 
 openai.api_key = st.secrets["API_KEYS"]["openai"]
 
 
-#gptflix_logo = Image.open('./chat/logo.png')
+gptflix_logo = Image.open('./chat/logo.png')
 
-bens_bites_logo = Image.open('./chat/Bens_Bites_Logo.jpg')
+#bens_bites_logo = Image.open('./chat/Bens_Bites_Logo.jpg')
 
 # random user picture
 user_av = random.randint(0, 100)
@@ -40,7 +40,7 @@ st.set_page_config(page_title="GPTflix", page_icon="🍿", layout="wide")
 st.header("GPTflix is like chatGPT for movie reviews!🍿\n")
 
 
-st.header("Thanks for visiting GPTflix! It's been a fun experiment, with over 4000 unique users over four weeks and an average of 10 questions per user while the site was online! Perhaps we will be back some time...🍿\n")
+st.header("Thanks for visiting GPTflix! ")
 
 # Define the name of the index and the dimensionality of the embeddings
 index_name = "400kmovies"
